@@ -414,22 +414,32 @@
   .flame .stars,
   .barbed .stars { opacity: 0 !important; }
 
-  /* Drifting leaves — only visible in nature theme */
+  /* Falling leaves — only visible in nature theme */
   .leaves {
     background-image:
-      radial-gradient(8px 4px at 12% 20%, oklch(0.55 0.18 145 / 0.35), transparent 60%),
-      radial-gradient(10px 5px at 78% 35%, oklch(0.6 0.2 130 / 0.3), transparent 60%),
-      radial-gradient(7px 3px at 30% 70%, oklch(0.5 0.16 150 / 0.35), transparent 60%),
-      radial-gradient(9px 4px at 88% 80%, oklch(0.62 0.18 110 / 0.3), transparent 60%),
-      radial-gradient(6px 3px at 55% 50%, oklch(0.58 0.17 140 / 0.35), transparent 60%);
+      radial-gradient(12px 6px at 12% 0%, oklch(0.52 0.18 145 / 0.5), transparent 65%),
+      radial-gradient(14px 7px at 72% 0%, oklch(0.58 0.2 125 / 0.45), transparent 65%),
+      radial-gradient(10px 5px at 32% 0%, oklch(0.48 0.16 155 / 0.5), transparent 65%),
+      radial-gradient(11px 6px at 88% 0%, oklch(0.6 0.17 115 / 0.42), transparent 65%),
+      radial-gradient(9px 5px at 48% 0%, oklch(0.55 0.18 138 / 0.48), transparent 65%),
+      radial-gradient(8px 4px at 22% 0%, oklch(0.5 0.15 150 / 0.4), transparent 65%);
     background-size: 100% 100%;
+    background-repeat: no-repeat;
     opacity: 0;
   }
-  .nature .leaves { opacity: 1; animation: leaf-drift 22s ease-in-out infinite alternate; }
-  @keyframes leaf-drift {
-    0%   { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; transform: translateY(0); }
-    50%  { background-position: 4% 6%, -3% 5%, 5% -4%, -4% 7%, 3% -3%; }
-    100% { background-position: -2% 8%, 4% -5%, -3% 6%, 5% -4%, -4% 5%; transform: translateY(-6px); }
+  .nature .leaves {
+    opacity: 1;
+    animation: leaf-fall 16s linear infinite;
+  }
+  @keyframes leaf-fall {
+    0% {
+      background-position: 8% -12%, 68% -18%, 28% -8%, 92% -22%, 44% -15%, 18% -20%;
+      transform: rotate(-4deg);
+    }
+    100% {
+      background-position: 14% 112%, 62% 118%, 34% 108%, 86% 115%, 50% 110%, 22% 120%;
+      transform: rotate(18deg);
+    }
   }
 
   .theme-ornament {
@@ -440,23 +450,32 @@
     transition: opacity 0.45s ease;
   }
 
-  /* Pastel Princess: pearl sparkles and soft ribbon arcs. */
+  /* Pastel Princess: twinkling pearl sparkles and soft ribbon arcs. */
   .theme-ornament-pastel {
     background-image:
-      radial-gradient(circle at 18px 18px, oklch(0.95 0.06 330 / 0.55) 0 2px, transparent 2.5px),
-      radial-gradient(circle at 84px 46px, oklch(0.9 0.08 305 / 0.42) 0 1.5px, transparent 2px),
-      radial-gradient(ellipse 28px 10px at 120px 86px, oklch(0.9 0.08 15 / 0.16) 0 45%, transparent 48%),
-      linear-gradient(115deg, transparent 0 46%, oklch(0.88 0.08 305 / 0.16) 47% 48%, transparent 49% 100%);
-    background-size: 150px 120px, 130px 150px, 210px 160px, 260px 260px;
-    filter: blur(0.1px);
+      radial-gradient(circle at 12px 14px, oklch(0.98 0.05 330 / 0.85) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 48px 32px, oklch(0.95 0.08 305 / 0.7) 0 1.2px, transparent 1.8px),
+      radial-gradient(circle at 92px 18px, oklch(0.97 0.06 15 / 0.75) 0 1.8px, transparent 2.4px),
+      radial-gradient(circle at 28px 68px, oklch(0.94 0.07 340 / 0.65) 0 1px, transparent 1.6px),
+      radial-gradient(circle at 110px 74px, oklch(0.96 0.05 280 / 0.6) 0 1.4px, transparent 2px),
+      radial-gradient(ellipse 28px 10px at 120px 86px, oklch(0.9 0.08 15 / 0.14) 0 45%, transparent 48%),
+      linear-gradient(115deg, transparent 0 46%, oklch(0.88 0.08 305 / 0.14) 47% 48%, transparent 49% 100%);
+    background-size: 90px 80px, 110px 95px, 130px 110px, 100px 90px, 140px 120px, 210px 160px, 260px 260px;
+    mix-blend-mode: screen;
   }
   :root:not(.dark):not(.nature):not(.ocean) .theme-ornament-pastel {
-    opacity: 0.78;
-    animation: pastel-sparkle-drift 24s ease-in-out infinite alternate;
+    opacity: 0.88;
+    animation:
+      pastel-sparkle-drift 20s ease-in-out infinite alternate,
+      sparkle-twinkle 3.2s ease-in-out infinite;
   }
   @keyframes pastel-sparkle-drift {
-    0% { background-position: 0 0, 0 0, 0 0, 0 0; transform: translate3d(0,0,0); }
-    100% { background-position: 34px 70px, -28px 54px, 44px -30px, 80px 42px; transform: translate3d(0,-8px,0); }
+    0% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; transform: translate3d(0, 0, 0); }
+    100% { background-position: 40px 60px, -32px 48px, 56px -24px, -20px 70px, 44px 36px, 50px -28px, 72px 38px; transform: translate3d(0, -6px, 0); }
+  }
+  @keyframes sparkle-twinkle {
+    0%, 100% { filter: brightness(1) contrast(1); opacity: 0.75; }
+    50% { filter: brightness(1.55) contrast(1.1); opacity: 1; }
   }
 
   /* Dark Astrology: drifting zodiac rings, stars, and faint chart lines. */
@@ -478,63 +497,92 @@
     100% { background-position: 240px 120px, -140px 120px, 260px 0, -160px 80px; transform: rotate(0.001turn) scale(1.02); }
   }
 
-  /* Green Nature: layered vines, pollen specks, and drifting leaf silhouettes. */
+  /* Green Nature: soft canopy haze and pollen (leaves fall via .leaves layer). */
   .theme-ornament-nature {
     background-image:
-      radial-gradient(ellipse 18px 8px at 38px 30px, oklch(0.58 0.16 145 / 0.26) 0 48%, transparent 52%),
-      radial-gradient(ellipse 14px 7px at 120px 86px, oklch(0.68 0.15 118 / 0.22) 0 48%, transparent 52%),
-      radial-gradient(circle at 90px 36px, oklch(0.82 0.1 95 / 0.28) 0 1.8px, transparent 2.4px),
-      linear-gradient(118deg, transparent 0 48%, oklch(0.56 0.14 145 / 0.12) 49% 50%, transparent 51% 100%);
-    background-size: 180px 140px, 220px 170px, 120px 110px, 300px 300px;
+      radial-gradient(ellipse 120px 60px at 20% 0%, oklch(0.55 0.14 145 / 0.12) 0 55%, transparent 58%),
+      radial-gradient(ellipse 100px 50px at 80% 5%, oklch(0.62 0.13 130 / 0.1) 0 55%, transparent 58%),
+      radial-gradient(circle at 90px 36px, oklch(0.82 0.1 95 / 0.22) 0 1.5px, transparent 2.2px),
+      linear-gradient(118deg, transparent 0 48%, oklch(0.56 0.14 145 / 0.08) 49% 50%, transparent 51% 100%);
+    background-size: 100% 80px, 100% 70px, 120px 110px, 300px 300px;
   }
   .nature .theme-ornament-nature {
-    opacity: 0.72;
-    animation: nature-canopy-sway 28s ease-in-out infinite alternate;
+    opacity: 0.55;
+    animation: nature-canopy-sway 32s ease-in-out infinite alternate;
   }
   @keyframes nature-canopy-sway {
-    0% { background-position: 0 0, 20px 0, 0 0, 0 0; transform: translateX(-3px); }
-    100% { background-position: 60px 42px, -34px 52px, 18px 34px, 90px 20px; transform: translateX(5px); }
+    0% { background-position: 0 0, 0 0, 0 0, 0 0; transform: translateX(-2px); }
+    100% { background-position: 30px 8px, -24px 12px, 14px 20px, 60px 16px; transform: translateX(3px); }
   }
 
-  /* Ember Flames: rising cinders and low heat shimmer. */
+  /* Ember Flames: fire glow, rising smoke wisps, and embers. */
   .theme-ornament-flame {
     background-image:
-      radial-gradient(circle at 24px 116px, oklch(0.78 0.2 45 / 0.45) 0 2px, transparent 2.7px),
-      radial-gradient(circle at 92px 150px, oklch(0.72 0.24 28 / 0.34) 0 1.7px, transparent 2.4px),
-      radial-gradient(ellipse 22px 70px at 132px 180px, oklch(0.58 0.22 35 / 0.13) 0 42%, transparent 45%),
-      linear-gradient(90deg, transparent 0 48%, oklch(0.72 0.2 45 / 0.08) 49% 50%, transparent 51% 100%);
-    background-size: 130px 220px, 190px 260px, 240px 300px, 180px 180px;
-    filter: blur(0.15px);
+      radial-gradient(ellipse 140% 35% at 50% 100%, oklch(0.68 0.22 40 / 0.35) 0 42%, transparent 55%),
+      radial-gradient(ellipse 90px 120px at 30% 90%, oklch(0.42 0.04 40 / 0.22) 0 48%, transparent 52%),
+      radial-gradient(ellipse 110px 140px at 75% 85%, oklch(0.38 0.03 35 / 0.18) 0 48%, transparent 52%),
+      radial-gradient(circle at 24px 116px, oklch(0.82 0.22 45 / 0.7) 0 2px, transparent 2.8px),
+      radial-gradient(circle at 92px 150px, oklch(0.76 0.26 28 / 0.55) 0 1.8px, transparent 2.5px),
+      radial-gradient(circle at 56px 80px, oklch(0.78 0.2 50 / 0.5) 0 1.4px, transparent 2px),
+      radial-gradient(ellipse 28px 90px at 132px 200px, oklch(0.55 0.18 35 / 0.2) 0 40%, transparent 44%);
+    background-size: 100% 100%, 280px 320px, 300px 340px, 120px 200px, 170px 240px, 140px 180px, 260px 360px;
+    mix-blend-mode: screen;
   }
   .flame .theme-ornament-flame {
-    opacity: 0.72;
-    animation: ember-rise 9s linear infinite, heat-waver 3.8s ease-in-out infinite;
+    opacity: 0.85;
+    animation:
+      ember-rise 7s linear infinite,
+      smoke-rise 18s linear infinite,
+      flame-flicker 2.4s ease-in-out infinite;
   }
   @keyframes ember-rise {
-    0% { background-position: 0 160px, 40px 220px, 0 80px, 0 0; }
-    100% { background-position: 18px -260px, -28px -220px, 40px -180px, 28px 0; }
+    0% { background-position: 0 0, 0 200px, 40px 240px, 0 140px, 30px 180px, 10px 120px, 0 100px; }
+    100% { background-position: 0 0, 20px -280px, -30px -320px, 16px -300px, -24px -340px, 8px -280px, 36px -260px; }
   }
-  @keyframes heat-waver {
-    0%, 100% { transform: skewX(0deg); filter: blur(0.15px) brightness(1); }
-    50% { transform: skewX(-0.8deg); filter: blur(0.45px) brightness(1.12); }
+  @keyframes smoke-rise {
+    0% { filter: blur(6px) brightness(0.95); transform: translateY(0) scaleY(1); }
+    50% { filter: blur(10px) brightness(1.05); transform: translateY(-12px) scaleY(1.04); }
+    100% { filter: blur(8px) brightness(0.98); transform: translateY(-4px) scaleY(1.02); }
+  }
+  @keyframes flame-flicker {
+    0%, 100% { opacity: 0.8; }
+    40% { opacity: 0.95; }
+    70% { opacity: 0.72; }
   }
 
-  /* Tidal Ocean: foam bubbles and slow wave interference. */
+  /* Tidal Ocean: rolling waves, foam, and water drips. */
   .theme-ornament-ocean {
     background-image:
-      radial-gradient(circle at 34px 42px, oklch(0.96 0.04 210 / 0.55) 0 2px, transparent 2.8px),
-      radial-gradient(circle at 120px 76px, oklch(0.78 0.12 205 / 0.34) 0 4px, transparent 4.8px),
-      radial-gradient(ellipse 76px 18px at 120px 136px, transparent 0 56%, oklch(0.74 0.12 220 / 0.22) 58% 62%, transparent 64%),
-      linear-gradient(100deg, transparent 0 47%, oklch(0.7 0.12 205 / 0.13) 48% 49%, transparent 50% 100%);
-    background-size: 150px 130px, 220px 180px, 280px 170px, 340px 260px;
+      linear-gradient(180deg,
+        transparent 0%,
+        oklch(0.78 0.1 220 / 0.08) 38%,
+        oklch(0.82 0.12 205 / 0.18) 48%,
+        oklch(0.76 0.1 215 / 0.1) 58%,
+        transparent 68%),
+      linear-gradient(180deg,
+        transparent 0%,
+        oklch(0.74 0.11 210 / 0.06) 42%,
+        oklch(0.8 0.13 200 / 0.14) 50%,
+        transparent 62%),
+      radial-gradient(ellipse 4px 14px at 22% 0%, oklch(0.85 0.1 210 / 0.45) 0 48%, transparent 52%),
+      radial-gradient(ellipse 3px 12px at 68% 0%, oklch(0.8 0.12 205 / 0.4) 0 48%, transparent 52%),
+      radial-gradient(ellipse 5px 16px at 42% 0%, oklch(0.88 0.08 215 / 0.38) 0 48%, transparent 52%),
+      radial-gradient(circle at 34px 42px, oklch(0.96 0.04 210 / 0.5) 0 2px, transparent 2.8px),
+      radial-gradient(circle at 120px 76px, oklch(0.78 0.12 205 / 0.32) 0 3px, transparent 4px);
+    background-size: 100% 72px, 100% 96px, 100% 100%, 100% 100%, 100% 100%, 150px 130px, 220px 180px;
+    background-repeat: repeat;
   }
   .ocean .theme-ornament-ocean {
-    opacity: 0.72;
-    animation: ocean-foam-drift 18s ease-in-out infinite alternate;
+    opacity: 0.78;
+    animation: ocean-flow 12s linear infinite;
   }
-  @keyframes ocean-foam-drift {
-    0% { background-position: 0 0, 0 0, 0 0, 0 0; transform: translateY(0); }
-    100% { background-position: 50px 24px, -46px 38px, 90px -12px, -80px 28px; transform: translateY(-5px); }
+  @keyframes ocean-flow {
+    0% {
+      background-position: 0 0, 0 48px, 12% -8%, 70% -12%, 38% -6%, 0 0, 0 0;
+    }
+    100% {
+      background-position: 0 72px, 0 120px, 16% 115%, 64% 118%, 42% 112%, 48px 28px, -34px 22px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -546,19 +594,26 @@
     }
   }
 
-  /* Petals — only visible in pastel theme */
+  /* Sparkle motes — only visible in pastel theme */
   .petals {
     background-image:
-      radial-gradient(5px 5px at 18% 22%, oklch(0.9 0.08 340 / 0.55), transparent 60%),
-      radial-gradient(4px 4px at 72% 38%, oklch(0.88 0.1 305 / 0.5), transparent 60%),
-      radial-gradient(5px 5px at 38% 75%, oklch(0.9 0.07 15 / 0.55), transparent 60%),
-      radial-gradient(3px 3px at 84% 82%, oklch(0.9 0.08 305 / 0.5), transparent 60%);
+      radial-gradient(3px 3px at 12% 0%, oklch(0.98 0.06 330 / 0.9), transparent 65%),
+      radial-gradient(2px 2px at 58% 0%, oklch(0.96 0.08 305 / 0.85), transparent 65%),
+      radial-gradient(3px 3px at 34% 0%, oklch(0.97 0.07 15 / 0.88), transparent 65%),
+      radial-gradient(2px 2px at 78% 0%, oklch(0.95 0.06 280 / 0.8), transparent 65%),
+      radial-gradient(2px 2px at 90% 0%, oklch(0.98 0.05 340 / 0.85), transparent 65%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    mix-blend-mode: screen;
     opacity: 0;
   }
-  :root:not(.dark):not(.nature):not(.ocean) .petals { opacity: 1; animation: petal-fall 18s linear infinite; }
-  @keyframes petal-fall {
-    0%   { background-position: 0% -10%, 0% -10%, 0% -10%, 0% -10%; }
-    100% { background-position: 4% 110%, -3% 110%, 5% 110%, -4% 110%; }
+  :root:not(.dark):not(.nature):not(.ocean) .petals {
+    opacity: 1;
+    animation: sparkle-fall 12s linear infinite, sparkle-twinkle 2.8s ease-in-out infinite;
+  }
+  @keyframes sparkle-fall {
+    0%   { background-position: 10% -8%, 55% -12%, 30% -6%, 75% -15%, 88% -10%; }
+    100% { background-position: 16% 112%, 52% 118%, 36% 108%, 72% 115%, 84% 120%; }
   }
 
   /* Animated theme-tinted aura behind body */
